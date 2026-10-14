@@ -1,6 +1,8 @@
+import 'dotenv/config';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { SupabaseDatabaseService } from './supabase-db.ts';
 import type { Section, Note, Comment, SearchResult } from '../types/index.ts';
 
 interface DatabaseData {
@@ -271,6 +273,8 @@ class DatabaseService {
   constructor() {
     this.data = this.loadData();
   }
+
+  async initialize(): Promise<void> {}
 
   private ensureDirectory() {
     if (!fs.existsSync(DATA_DIR)) {
@@ -866,4 +870,6 @@ class DatabaseService {
   }
 }
 
-export const db = new DatabaseService();
+export const db = process.env.DATABASE_URL
+  ? new SupabaseDatabaseService(process.env.DATABASE_URL)
+  : new DatabaseService();

@@ -13,7 +13,7 @@ export const Hero: React.FC<HeroProps> = ({ onAddSection }) => {
         <div className="md:col-span-7 lg:col-span-8 space-y-4">
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#26352C] leading-[1.15] text-balance">
             Selamat datang di <br className="hidden sm:inline" />
-            <span className="italic font-normal">Ruang Catatan</span>
+            <span className="italic font-normal">Catatan 7Smarts</span>
           </h1>
 
           <p className="text-[#778078] text-base sm:text-lg max-w-xl leading-relaxed">
