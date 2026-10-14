@@ -1,0 +1,6 @@
+{
+  "name": "Ruang Catatan",
+  "description": "Aplikasi catatan kolaboratif minimalis, elegan, dan tenang dengan rich text editor, autosave, dan komentar publik.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,241 @@
+{
+  "sections": [
+    {
+      "id": "sec-1",
+      "title": "Catatan Magang",
+      "slug": "catatan-magang",
+      "icon": "file-text",
+      "description": "Berisi catatan selama kegiatan magang, mulai dari ide, diskusi, hingga hasil kerja.",
+      "sortOrder": 1,
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-11T14:32:00.000Z"
+    },
+    {
+      "id": "sec-2",
+      "title": "Ide Project",
+      "slug": "ide-project",
+      "icon": "lightbulb",
+      "description": "Kumpulan gagasan kreatif, eksplorasi teknologi baru, dan rencana arsitektur sistem.",
+      "sortOrder": 2,
+      "createdAt": "2025-04-02T09:30:00.000Z",
+      "updatedAt": "2025-04-10T11:20:00.000Z"
+    },
+    {
+      "id": "sec-3",
+      "title": "Kuliah",
+      "slug": "kuliah",
+      "icon": "graduation-cap",
+      "description": "Rangkuman materi perkuliahan, tugas akhir, dan jadwal bimbingan akademik.",
+      "sortOrder": 3,
+      "createdAt": "2025-04-03T10:00:00.000Z",
+      "updatedAt": "2025-04-09T16:45:00.000Z"
+    },
+    {
+      "id": "sec-4",
+      "title": "Referensi",
+      "slug": "referensi",
+      "icon": "link",
+      "description": "Tautan dokumentasi, artikel ilmiah, panduan desain, dan inspirasi open source.",
+      "sortOrder": 4,
+      "createdAt": "2025-04-04T13:15:00.000Z",
+      "updatedAt": "2025-04-08T15:10:00.000Z"
+    },
+    {
+      "id": "sec-5",
+      "title": "Meeting",
+      "slug": "meeting",
+      "icon": "users",
+      "description": "Notula rapat internal tim, sync mingguan, dan tindak lanjut action items.",
+      "sortOrder": 5,
+      "createdAt": "2025-04-05T14:00:00.000Z",
+      "updatedAt": "2025-04-07T17:00:00.000Z"
+    }
+  ],
+  "notes": [
+    {
+      "id": "note-1",
+      "sectionId": "sec-1",
+      "title": "Hasil diskusi mentor",
+      "slug": "hasil-diskusi-mentor",
+      "content": "<p>Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain:</p><ol><li>Fokus pada fitur utama terlebih dahulu.</li><li>Gunakan teknologi yang lebih stabil dan mudah di-maintain.</li><li>Pertimbangkan integrasi dengan layanan pihak ketiga.</li></ol><h3>Catatan tambahan</h3><ul data-type=\"taskList\"><li data-checked=\"false\"><label><input type=\"checkbox\"></label><div><p>Perbaiki struktur database</p></div></li><li data-checked=\"true\"><label><input type=\"checkbox\" checked=\"checked\"></label><div><p>Update dokumentasi API</p></div></li><li data-checked=\"false\"><label><input type=\"checkbox\"></label><div><p>Siapkan prototype untuk evaluasi</p></div></li></ul><p>Link referensi: <a href=\"https://example.com/mentorship\" target=\"_blank\" rel=\"noopener noreferrer\">https://example.com/mentorship</a></p>",
+      "snippet": "Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain: fokus pada fitur utama terlebih dahulu...",
+      "sortOrder": 1,
+      "createdAt": "2025-04-10T08:30:00.000Z",
+      "updatedAt": "2025-04-11T14:32:00.000Z"
+    },
+    {
+      "id": "note-2",
+      "sectionId": "sec-1",
+      "title": "Ide pengembangan aplikasi",
+      "slug": "ide-pengembangan-aplikasi",
+      "content": "<p>Beberapa ide fitur yang bisa dikembangkan untuk project magang, seperti sistem notifikasi dan integrasi API yang lebih modular.</p><ul><li>Desain antarmuka yang lebih clean dan ramah pengguna mobile.</li><li>Optimalisasi debounce autosave untuk pengalaman menulis tanpa jeda.</li><li>Pengelompokan catatan dengan sistem penanda dan pencarian cepat.</li></ul>",
+      "snippet": "Beberapa ide fitur yang bisa dikembangkan untuk project magang, seperti sistem notifikasi dan integrasi API...",
+      "sortOrder": 2,
+      "createdAt": "2025-04-12T09:00:00.000Z",
+      "updatedAt": "2025-04-12T09:00:00.000Z"
+    },
+    {
+      "id": "note-3",
+      "sectionId": "sec-1",
+      "title": "Daftar revisi",
+      "slug": "daftar-revisi",
+      "content": "<p>Berikut adalah daftar revisi yang perlu dilakukan sebelum presentasi final minggu depan:</p><ul data-type=\"taskList\"><li data-checked=\"true\"><label><input type=\"checkbox\" checked=\"checked\"></label><div><p>Uji responsivitas pada perangkat layar sentuh</p></div></li><li data-checked=\"false\"><label><input type=\"checkbox\"></label><div><p>Periksa validasi input komentar terhadap konten spam</p></div></li><li data-checked=\"false\"><label><input type=\"checkbox\"></label><div><p>Tambahkan breadcrumb navigasi yang intuitif</p></div></li></ul>",
+      "snippet": "Berikut adalah daftar revisi yang perlu dilakukan sebelum presentasi final...",
+      "sortOrder": 3,
+      "createdAt": "2025-04-08T10:15:00.000Z",
+      "updatedAt": "2025-04-08T10:15:00.000Z"
+    },
+    {
+      "id": "note-4",
+      "sectionId": "sec-1",
+      "title": "Referensi project",
+      "slug": "referensi-project",
+      "content": "<p>Beberapa referensi project yang bisa dijadikan inspirasi untuk pengembangan fitur dan pengalaman antarmuka yang nyaman.</p><p>Prinsip utama yang diadaptasi adalah estetika editorial tenang dengan aksen warna sage green dan cream hangat.</p>",
+      "snippet": "Beberapa referensi project yang bisa dijadikan inspirasi untuk pengembangan fitur...",
+      "sortOrder": 4,
+      "createdAt": "2025-04-05T11:45:00.000Z",
+      "updatedAt": "2025-04-05T11:45:00.000Z"
+    },
+    {
+      "id": "note-5",
+      "sectionId": "sec-2",
+      "title": "Arsitektur micro-services sederhana",
+      "slug": "arsitektur-micro-services-sederhana",
+      "content": "<p>Rancangan pemisahan service otorisasi dan konten utama untuk menjaga performa server tetap stabil.</p>",
+      "snippet": "Rancangan pemisahan service otorisasi dan konten utama untuk menjaga performa...",
+      "sortOrder": 1,
+      "createdAt": "2025-04-02T10:00:00.000Z",
+      "updatedAt": "2025-04-06T12:00:00.000Z"
+    },
+    {
+      "id": "note-6",
+      "sectionId": "sec-2",
+      "title": "Benchmarking state management",
+      "slug": "benchmarking-state-management",
+      "content": "<p>Hasil perbandingan performa antara optimistic updates dan server-rendered state.</p>",
+      "snippet": "Hasil perbandingan performa antara optimistic updates dan server-rendered state...",
+      "sortOrder": 2,
+      "createdAt": "2025-04-04T15:20:00.000Z",
+      "updatedAt": "2025-04-07T08:10:00.000Z"
+    },
+    {
+      "id": "note-7",
+      "sectionId": "sec-2",
+      "title": "Desain sistem tema tenang",
+      "slug": "desain-sistem-tema-tenang",
+      "content": "<p>Eksplorasi palet warna sage, cream, dan forest green untuk menghindari kelelahan mata pengguna saat membaca panjang.</p>",
+      "snippet": "Eksplorasi palet warna sage, cream, dan forest green untuk menghindari kelelahan mata...",
+      "sortOrder": 3,
+      "createdAt": "2025-04-06T14:00:00.000Z",
+      "updatedAt": "2025-04-09T18:00:00.000Z"
+    },
+    {
+      "id": "note-8",
+      "sectionId": "sec-3",
+      "title": "Rangkuman kuliah basis data lanjut",
+      "slug": "rangkuman-kuliah-basis-data-lanjut",
+      "content": "<p>Konsep indexing B-Tree, query optimization, dan normalisasi bentuk ketiga hingga BCNF.</p>",
+      "snippet": "Konsep indexing B-Tree, query optimization, dan normalisasi bentuk ketiga hingga BCNF...",
+      "sortOrder": 1,
+      "createdAt": "2025-04-03T08:00:00.000Z",
+      "updatedAt": "2025-04-05T09:00:00.000Z"
+    },
+    {
+      "id": "note-9",
+      "sectionId": "sec-4",
+      "title": "Dokumentasi REST API & Best Practices",
+      "slug": "dokumentasi-rest-api-best-practices",
+      "content": "<p>Kumpulan tautan panduan REST API standar industri, status codes yang tepat, dan teknik caching.</p>",
+      "snippet": "Kumpulan tautan panduan REST API standar industri, status codes yang tepat...",
+      "sortOrder": 1,
+      "createdAt": "2025-04-04T14:00:00.000Z",
+      "updatedAt": "2025-04-08T11:00:00.000Z"
+    },
+    {
+      "id": "note-10",
+      "sectionId": "sec-5",
+      "title": "Sinkronisasi mingguan sprint 4",
+      "slug": "sinkronisasi-mingguan-sprint-4",
+      "content": "<p>Catatan pembahasan sprint 4 mengenai integrasi rich text dan autosave debounce.</p>",
+      "snippet": "Catatan pembahasan sprint 4 mengenai integrasi rich text dan autosave debounce...",
+      "sortOrder": 1,
+      "createdAt": "2025-04-05T15:00:00.000Z",
+      "updatedAt": "2025-04-07T16:00:00.000Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": "comm-1",
+      "noteId": "note-1",
+      "authorName": "Rina",
+      "content": "Terima kasih atas rangkumannya! Sangat membantu sekali ✨",
+      "createdAt": "2025-04-11T15:20:00.000Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-2",
+      "noteId": "note-1",
+      "authorName": "Dika",
+      "content": "Menurutku poin nomor 2 juga penting banget, semoga bisa segera diimplementasikan.",
+      "createdAt": "2025-04-11T14:50:00.000Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-3",
+      "noteId": "note-1",
+      "authorName": "Sari",
+      "content": "Link referensinya menarik, makasih sudah share!",
+      "createdAt": "2025-04-10T16:30:00.000Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-4",
+      "noteId": "note-1",
+      "authorName": "Budi",
+      "content": "Siap, untuk prototipe evaluasi sudah mulai kami kerjakan bersama tim.",
+      "createdAt": "2025-04-10T11:15:00.000Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-5",
+      "noteId": "note-1",
+      "authorName": "Andra",
+      "content": "Mantap rangkumannya, jelas dan to the point.",
+      "createdAt": "2025-04-09T09:40:00.000Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-6",
+      "noteId": "note-2",
+      "authorName": "Fajar",
+      "content": "Idenya bagus, terutama bagian autosave!",
+      "createdAt": "2025-04-12T10:00:00.000Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-7",
+      "noteId": "note-2",
+      "authorName": "Maya",
+      "content": "Bisa ditambah shortcut keyboard juga nantinya.",
+      "createdAt": "2025-04-12T11:20:00.000Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-8",
+      "noteId": "note-2",
+      "authorName": "Gusti",
+      "content": "Setuju, integrasi API modular akan memudahkan penambahan fitur baru.",
+      "createdAt": "2025-04-12T12:00:00.000Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-e7c9d961",
+      "noteId": "note-1",
+      "authorName": "Gilang",
+      "content": "Rangkuman yang sangat jelas, terima kasih!",
+      "createdAt": "2026-10-14T02:07:06.873Z",
+      "isModerated": false
+    }
+  ],
+  "version": 1
+}
