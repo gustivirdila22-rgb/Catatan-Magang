@@ -411,7 +411,7 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({
   };
 
 
-
+// Render balasan bertingkat untuk sebuah topik komentar.
   const renderThreadReplies = (
     parentId: string,
     depth = 0
