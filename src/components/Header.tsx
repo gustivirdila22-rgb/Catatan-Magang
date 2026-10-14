@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
             </svg>
           </div>
           <span className="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-[#26352C]">
-            Ruang Catatan
+            Catatan 7Smarts
           </span>
         </button>
 

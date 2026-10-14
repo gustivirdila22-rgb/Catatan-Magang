@@ -53,7 +53,7 @@ export const SectionDetailView: React.FC<SectionDetailViewProps> = ({
           className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-[#778078] hover:text-[#344F3D] transition-colors py-1 group self-start"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          <span>Ruang Catatan</span>
+          <span>Catatan 7Smarts</span>
         </button>
 
         {/* Section Search Bar */}

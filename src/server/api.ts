@@ -26,17 +26,21 @@ function getClientIp(req: Request): string {
 
 // ==================== OWNER AUTH ====================
 
-apiRouter.get('/owner/status', (req: Request, res: Response) => {
-  const isOwner = isOwnerSession(req);
-  const stats = db.getStats();
-  res.json({
-    isOwner,
-    databaseEngine: process.env.DATABASE_URL
-      ? 'PostgreSQL Engine'
-      : 'RuangCatatan Relational Store',
-    postgresConfigured: Boolean(process.env.DATABASE_URL),
-    ...stats,
-  });
+apiRouter.get('/owner/status', async (req: Request, res: Response) => {
+  try {
+    const isOwner = isOwnerSession(req);
+    const stats = await db.getStats();
+    res.json({
+      isOwner,
+      databaseEngine: process.env.DATABASE_URL
+        ? 'Supabase PostgreSQL'
+        : 'RuangCatatan Relational Store',
+      postgresConfigured: Boolean(process.env.DATABASE_URL),
+      ...stats,
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || 'Gagal memeriksa status database' });
+  }
 });
 
 apiRouter.post('/owner/login', (req: Request, res: Response) => {
@@ -74,19 +78,19 @@ apiRouter.post('/owner/logout', (req: Request, res: Response) => {
 
 // ==================== SECTIONS ====================
 
-apiRouter.get('/sections', (_req: Request, res: Response) => {
+apiRouter.get('/sections', async (_req: Request, res: Response) => {
   try {
-    const sections = db.getSections();
+    const sections = await db.getSections();
     res.json({ sections });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Gagal memuat sections' });
   }
 });
 
-apiRouter.get('/sections/:idOrSlug', (req: Request, res: Response) => {
+apiRouter.get('/sections/:idOrSlug', async (req: Request, res: Response) => {
   try {
     const { idOrSlug } = req.params;
-    const section = db.getSectionByIdOrSlug(idOrSlug);
+    const section = await db.getSectionByIdOrSlug(idOrSlug);
     if (!section) {
       res.status(404).json({ error: 'Section tidak ditemukan' });
       return;
@@ -97,7 +101,7 @@ apiRouter.get('/sections/:idOrSlug', (req: Request, res: Response) => {
   }
 });
 
-apiRouter.post('/sections', requireOwnerMiddleware, (req: Request, res: Response) => {
+apiRouter.post('/sections', requireOwnerMiddleware, async (req: Request, res: Response) => {
   try {
     const { title, description, icon } = req.body || {};
     if (!title || typeof title !== 'string' || !title.trim()) {
@@ -105,7 +109,7 @@ apiRouter.post('/sections', requireOwnerMiddleware, (req: Request, res: Response
       return;
     }
 
-    const newSec = db.createSection({
+    const newSec = await db.createSection({
       title: title.trim(),
       description: typeof description === 'string' ? description.trim() : '',
       icon: typeof icon === 'string' ? icon.trim() : 'file-text',
@@ -120,12 +124,12 @@ apiRouter.post('/sections', requireOwnerMiddleware, (req: Request, res: Response
   }
 });
 
-apiRouter.put('/sections/:id', requireOwnerMiddleware, (req: Request, res: Response) => {
+apiRouter.put('/sections/:id', requireOwnerMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { title, description, icon, sortOrder } = req.body || {};
 
-    const updated = db.updateSection(id, {
+    const updated = await db.updateSection(id, {
       title,
       description,
       icon,
@@ -141,10 +145,10 @@ apiRouter.put('/sections/:id', requireOwnerMiddleware, (req: Request, res: Respo
   }
 });
 
-apiRouter.delete('/sections/:id', requireOwnerMiddleware, (req: Request, res: Response) => {
+apiRouter.delete('/sections/:id', requireOwnerMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const result = db.deleteSection(id);
+    const result = await db.deleteSection(id);
     res.json({
       ok: true,
       message: `Section berhasil dihapus beserta ${result.deletedNotesCount} catatan dan ${result.deletedCommentsCount} komentar.`,
@@ -157,10 +161,10 @@ apiRouter.delete('/sections/:id', requireOwnerMiddleware, (req: Request, res: Re
 
 // ==================== NOTES ====================
 
-apiRouter.get('/notes/:id', (req: Request, res: Response) => {
+apiRouter.get('/notes/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const note = db.getNoteById(id);
+    const note = await db.getNoteById(id);
     if (!note) {
       res.status(404).json({ error: 'Catatan tidak ditemukan' });
       return;
@@ -168,7 +172,7 @@ apiRouter.get('/notes/:id', (req: Request, res: Response) => {
 
     // If owner, also fetch moderated comments
     if (isOwnerSession(req)) {
-      note.comments = db.getCommentsByNoteId(note.id, true);
+      note.comments = await db.getCommentsByNoteId(note.id, true);
     }
 
     res.json({ note });
@@ -177,7 +181,7 @@ apiRouter.get('/notes/:id', (req: Request, res: Response) => {
   }
 });
 
-apiRouter.post('/notes', requireOwnerMiddleware, (req: Request, res: Response) => {
+apiRouter.post('/notes', requireOwnerMiddleware, async (req: Request, res: Response) => {
   try {
     const { sectionId, title, content } = req.body || {};
     if (!sectionId || typeof sectionId !== 'string') {
@@ -189,7 +193,7 @@ apiRouter.post('/notes', requireOwnerMiddleware, (req: Request, res: Response) =
       return;
     }
 
-    const newNote = db.createNote({
+    const newNote = await db.createNote({
       sectionId,
       title: title.trim(),
       content: typeof content === 'string' ? content : '<p></p>',
@@ -204,12 +208,12 @@ apiRouter.post('/notes', requireOwnerMiddleware, (req: Request, res: Response) =
   }
 });
 
-apiRouter.put('/notes/:id', requireOwnerMiddleware, (req: Request, res: Response) => {
+apiRouter.put('/notes/:id', requireOwnerMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { title, content, sortOrder } = req.body || {};
 
-    const updated = db.updateNote(id, {
+    const updated = await db.updateNote(id, {
       title,
       content,
       sortOrder: typeof sortOrder === 'number' ? sortOrder : undefined,
@@ -224,10 +228,10 @@ apiRouter.put('/notes/:id', requireOwnerMiddleware, (req: Request, res: Response
   }
 });
 
-apiRouter.delete('/notes/:id', requireOwnerMiddleware, (req: Request, res: Response) => {
+apiRouter.delete('/notes/:id', requireOwnerMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const result = db.deleteNote(id);
+    const result = await db.deleteNote(id);
     res.json({
       ok: true,
       message: `Catatan berhasil dihapus beserta ${result.deletedCommentsCount} komentar.`,
@@ -240,18 +244,18 @@ apiRouter.delete('/notes/:id', requireOwnerMiddleware, (req: Request, res: Respo
 
 // ==================== COMMENTS ====================
 
-apiRouter.get('/notes/:noteId/comments', (req: Request, res: Response) => {
+apiRouter.get('/notes/:noteId/comments', async (req: Request, res: Response) => {
   try {
     const { noteId } = req.params;
     const isOwner = isOwnerSession(req);
-    const comments = db.getCommentsByNoteId(noteId, isOwner);
+    const comments = await db.getCommentsByNoteId(noteId, isOwner);
     res.json({ comments });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Gagal memuat komentar' });
   }
 });
 
-apiRouter.post('/notes/:noteId/comments', (req: Request, res: Response) => {
+apiRouter.post('/notes/:noteId/comments', async (req: Request, res: Response) => {
   try {
     const { noteId } = req.params;
     const ip = getClientIp(req);
@@ -324,7 +328,7 @@ apiRouter.post('/notes/:noteId/comments', (req: Request, res: Response) => {
       return;
     }
 
-    const note = db.getNoteById(noteId);
+    const note = await db.getNoteById(noteId);
 
     if (!note) {
       res.status(404).json({
@@ -333,7 +337,7 @@ apiRouter.post('/notes/:noteId/comments', (req: Request, res: Response) => {
       return;
     }
 
-    const newComment = db.addComment({
+    const newComment = await db.addComment({
       noteId,
       authorName: isOwner
         ? 'Pemilik Catatan'
@@ -345,8 +349,7 @@ apiRouter.post('/notes/:noteId/comments', (req: Request, res: Response) => {
 
     commentRateMap.set(ip, now);
 
-    const comments = db.getCommentsByNoteId(noteId, isOwner);
-
+    const comments = await db.getCommentsByNoteId(noteId, isOwner);
     res.status(201).json({
       comment: newComment,
       commentCount: comments.length,
@@ -361,10 +364,10 @@ apiRouter.post('/notes/:noteId/comments', (req: Request, res: Response) => {
   }
 });
 
-apiRouter.put('/comments/:id/moderate', requireOwnerMiddleware, (req: Request, res: Response) => {
+apiRouter.put('/comments/:id/moderate', requireOwnerMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const comm = db.toggleModerateComment(id);
+    const comm = await db.toggleModerateComment(id);
     res.json({
       comment: comm,
       message: comm.isModerated
@@ -376,10 +379,10 @@ apiRouter.put('/comments/:id/moderate', requireOwnerMiddleware, (req: Request, r
   }
 });
 
-apiRouter.delete('/comments/:id', requireOwnerMiddleware, (req: Request, res: Response) => {
+apiRouter.delete('/comments/:id', requireOwnerMiddleware, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    db.deleteComment(id);
+    await db.deleteComment(id);
     res.json({ ok: true, message: 'Komentar berhasil dihapus.' });
   } catch (err: any) {
     res.status(400).json({ error: err.message || 'Gagal menghapus komentar' });
@@ -388,28 +391,28 @@ apiRouter.delete('/comments/:id', requireOwnerMiddleware, (req: Request, res: Re
 
 // ==================== SEARCH & OWNER VIEWS ====================
 
-apiRouter.get('/search', (req: Request, res: Response) => {
+apiRouter.get('/search', async (req: Request, res: Response) => {
   try {
     const query = typeof req.query.q === 'string' ? req.query.q : '';
-    const results = db.search(query);
+    const results = await db.search(query);
     res.json({ query, results, count: results.length });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Gagal melakukan pencarian' });
   }
 });
 
-apiRouter.get('/owner/notes', requireOwnerMiddleware, (_req: Request, res: Response) => {
+apiRouter.get('/owner/notes', requireOwnerMiddleware, async (_req: Request, res: Response) => {
   try {
-    const notes = db.getAllNotesForOwner();
+    const notes = await db.getAllNotesForOwner();
     res.json({ notes });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Gagal memuat daftar catatan' });
   }
 });
 
-apiRouter.get('/owner/comments', requireOwnerMiddleware, (_req: Request, res: Response) => {
+apiRouter.get('/owner/comments', requireOwnerMiddleware, async (_req: Request, res: Response) => {
   try {
-    const comments = db.getAllCommentsForOwner();
+    const comments = await db.getAllCommentsForOwner();
     res.json({ comments });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Gagal memuat daftar komentar' });
@@ -421,7 +424,7 @@ apiRouter.get('/system/info', (_req: Request, res: Response) => {
     appName: 'Ruang Catatan',
     version: '1.0.0',
     databaseEngine: process.env.DATABASE_URL
-      ? 'PostgreSQL (Cloud / Remote)'
+      ? 'Supabase PostgreSQL'
       : 'RuangCatatan Relational Store (Embedded Persistent Disk)',
     postgresConfigured: Boolean(process.env.DATABASE_URL),
     configuredEnvVars: {
