@@ -358,7 +358,7 @@ export const CommentsSection: React.FC<CommentsSectionProps> = ({
             </div>
           )}
 
-          {replyingTo === comm.id && (
+          {showActions && replyingTo === comm.id && (
             <form
               onSubmit={(e) => handleReply(e, comm.id)}
               className="mt-3 space-y-3 text-left"
