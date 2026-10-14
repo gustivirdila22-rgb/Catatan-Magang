@@ -245,51 +245,78 @@ export default function App() {
   };
 
   // Comment Handlers
-  const handleAddComment = async (authorName: string, content: string) => {
-    if (!currentNote) return;
-    const res = await api.addComment(currentNote.id, { authorName, content });
+const handleAddComment = async (
+  authorName: string,
+  content: string,
+  parentCommentId?: string | null
+) => {
+  if (!currentNote) return;
+
+  const res = await api.addComment(currentNote.id, {
+    authorName,
+    content,
+    parentCommentId,
+  });
+
+  setCurrentNote((prev) => {
+    if (!prev) return null;
+
+    const comments = [
+      res.comment,
+      ...prev.comments.filter((c) => c.id !== res.comment.id),
+    ].sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    );
+
+    return {
+      ...prev,
+      comments,
+      commentCount: res.commentCount,
+    };
+  });
+
+  addToast('success', res.message);
+};
+
+const handleToggleModerateComment = async (commentId: string) => {
+  try {
+    const res = await api.toggleModerateComment(commentId);
+
     setCurrentNote((prev) => {
       if (!prev) return null;
+
       return {
         ...prev,
-        comments: [...prev.comments, res.comment],
-        commentCount: res.commentCount,
+        comments: prev.comments.map((c) =>
+          c.id === commentId ? res.comment : c
+        ),
       };
     });
-    addToast('success', 'Komentar Anda berhasil dikirim.');
-  };
 
-  const handleToggleModerateComment = async (commentId: string) => {
-    try {
-      const res = await api.toggleModerateComment(commentId);
-      setCurrentNote((prev) => {
-        if (!prev) return null;
-        return {
-          ...prev,
-          comments: prev.comments.map((c) => (c.id === commentId ? res.comment : c)),
-        };
-      });
-      addToast('info', res.message);
-    } catch (err: any) {
-      addToast('error', err.message || 'Gagal memoderasi komentar');
-    }
-  };
+    addToast('info', res.message);
+  } catch (err: any) {
+    addToast('error', err.message || 'Gagal memoderasi komentar');
+  }
+};
 
-  const handleDeleteComment = async (commentId: string) => {
-    try {
-      await api.deleteComment(commentId);
-      setCurrentNote((prev) => {
-        if (!prev) return null;
-        return {
-          ...prev,
-          comments: prev.comments.filter((c) => c.id !== commentId),
-        };
-      });
-      addToast('success', 'Komentar berhasil dihapus.');
-    } catch (err: any) {
-      addToast('error', err.message || 'Gagal menghapus komentar');
+const handleDeleteComment = async (commentId: string) => {
+  try {
+    await api.deleteComment(commentId);
+
+    // Muat ulang dari server agar semua balasan turunan
+    // yang ikut dihapus juga langsung hilang dari tampilan.
+    if (currentNote) {
+      const res = await api.getNote(currentNote.id);
+      setCurrentNote(res.note);
     }
-  };
+
+    addToast('success', 'Komentar dan balasannya berhasil dihapus.');
+  } catch (err: any) {
+    addToast('error', err.message || 'Gagal menghapus komentar');
+  }
+};
 
   // Search selection handler
   const handleSelectSearchResult = (result: SearchResult) => {

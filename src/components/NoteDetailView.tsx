@@ -12,7 +12,11 @@ interface NoteDetailViewProps {
   onSaveContent: (contentHtml: string) => Promise<void>;
   onSaveTitle: (newTitle: string) => Promise<void>;
   onDeleteNote: () => void;
-  onAddComment: (authorName: string, content: string) => Promise<void>;
+  onAddComment: (
+  authorName: string,
+  content: string,
+  parentCommentId?: string | null
+) => Promise<void>;
   onToggleModerateComment: (commentId: string) => Promise<void>;
   onDeleteComment: (commentId: string) => Promise<void>;
   onRequestOwnerAuth: () => void;

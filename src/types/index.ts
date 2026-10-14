@@ -32,6 +32,8 @@ export interface Comment {
   content: string;
   createdAt: string;
   isModerated: boolean;
+  parentCommentId?: string | null;
+  isOwnerReply?: boolean;
 }
 
 export interface OwnerStatus {

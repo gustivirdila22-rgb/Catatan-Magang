@@ -168,7 +168,7 @@ const DEFAULT_NOTES: Note[] = [
     title: 'Rangkuman kuliah basis data lanjut',
     slug: 'rangkuman-kuliah-basis-data-lanjut',
     content: `<p>Konsep indexing B-Tree, query optimization, dan normalisasi bentuk ketiga hingga BCNF.</p>`,
-    snippet: 'Konsep indexing B-Tree, query optimization, dan normalisasi bentuk ketiga hingga BCNF...',
+    snippet: 'Konsep indexing B-Tree, query optimization, dan normalisasi bentuk ketiga...',
     sortOrder: 1,
     createdAt: '2025-04-03T08:00:00.000Z',
     updatedAt: '2025-04-05T09:00:00.000Z',
@@ -281,9 +281,11 @@ class DatabaseService {
   private loadData(): DatabaseData {
     try {
       this.ensureDirectory();
+
       if (fs.existsSync(DATA_FILE)) {
         const raw = fs.readFileSync(DATA_FILE, 'utf-8');
         const parsed = JSON.parse(raw);
+
         if (Array.isArray(parsed.sections) && Array.isArray(parsed.notes)) {
           return {
             sections: parsed.sections,
@@ -294,7 +296,10 @@ class DatabaseService {
         }
       }
     } catch (err) {
-      console.warn('[DB] Failed to load existing database file, falling back to seed data:', err);
+      console.warn(
+        '[DB] Failed to load existing database file, falling back to seed data:',
+        err
+      );
     }
 
     const initialData: DatabaseData = {
@@ -321,7 +326,9 @@ class DatabaseService {
 
   private save() {
     if (this.isPersisting) return;
+
     this.isPersisting = true;
+
     try {
       this.saveDataDirect(this.data);
     } finally {
@@ -341,6 +348,7 @@ class DatabaseService {
         const comments = this.data.comments.filter(
           (c) => noteIds.has(c.noteId) && !c.isModerated
         );
+
         return {
           ...sec,
           noteCount: secNotes.length,
@@ -353,15 +361,21 @@ class DatabaseService {
     const sec = this.data.sections.find(
       (s) => s.id === idOrSlug || s.slug === idOrSlug
     );
+
     if (!sec) return null;
 
     const secNotes = this.data.notes
       .filter((n) => n.sectionId === sec.id)
-      .sort((a, b) => a.sortOrder - b.sortOrder || new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+      .sort(
+        (a, b) =>
+          a.sortOrder - b.sortOrder ||
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      )
       .map((n) => {
         const comms = this.data.comments.filter(
           (c) => c.noteId === n.id && !c.isModerated
         );
+
         return {
           ...n,
           commentCount: comms.length,
@@ -391,9 +405,10 @@ class DatabaseService {
     if (!title) throw new Error('Judul section wajib diisi');
 
     const id = `sec-${crypto.randomUUID().slice(0, 8)}`;
-    let baseSlug = slugify(title) || 'section';
+    const baseSlug = slugify(title) || 'section';
     let slug = baseSlug;
     let counter = 1;
+
     while (this.data.sections.some((s) => s.slug === slug)) {
       slug = `${baseSlug}-${counter++}`;
     }
@@ -417,6 +432,7 @@ class DatabaseService {
 
     this.data.sections.push(newSection);
     this.save();
+
     return newSection;
   }
 
@@ -433,47 +449,60 @@ class DatabaseService {
     if (idx === -1) throw new Error('Section tidak ditemukan');
 
     const sec = this.data.sections[idx];
+
     if (updates.title !== undefined) {
       const trimmed = updates.title.trim();
       if (!trimmed) throw new Error('Judul section tidak boleh kosong');
+
       sec.title = trimmed;
       sec.slug = slugify(trimmed) || sec.slug;
     }
+
     if (updates.description !== undefined) {
       sec.description = updates.description.trim();
     }
+
     if (updates.icon !== undefined) {
       sec.icon = updates.icon.trim() || sec.icon;
     }
+
     if (updates.sortOrder !== undefined) {
       sec.sortOrder = updates.sortOrder;
     }
-    sec.updatedAt = new Date().toISOString();
 
+    sec.updatedAt = new Date().toISOString();
     this.data.sections[idx] = sec;
     this.save();
+
     return sec;
   }
 
-  deleteSection(id: string): { deletedNotesCount: number; deletedCommentsCount: number } {
+  deleteSection(
+    id: string
+  ): { deletedNotesCount: number; deletedCommentsCount: number } {
     const secIdx = this.data.sections.findIndex((s) => s.id === id);
     if (secIdx === -1) throw new Error('Section tidak ditemukan');
 
-    // Cascade delete notes and comments
     const noteIdsToDelete = this.data.notes
       .filter((n) => n.sectionId === id)
       .map((n) => n.id);
-    const deletedNotesCount = noteIdsToDelete.length;
 
+    const deletedNotesCount = noteIdsToDelete.length;
     const noteSet = new Set(noteIdsToDelete);
     const initialCommentsCount = this.data.comments.length;
-    this.data.comments = this.data.comments.filter((c) => !noteSet.has(c.noteId));
-    const deletedCommentsCount = initialCommentsCount - this.data.comments.length;
+
+    this.data.comments = this.data.comments.filter(
+      (c) => !noteSet.has(c.noteId)
+    );
+
+    const deletedCommentsCount =
+      initialCommentsCount - this.data.comments.length;
 
     this.data.notes = this.data.notes.filter((n) => n.sectionId !== id);
     this.data.sections.splice(secIdx, 1);
 
     this.save();
+
     return { deletedNotesCount, deletedCommentsCount };
   }
 
@@ -484,9 +513,14 @@ class DatabaseService {
     if (!note) return null;
 
     const sec = this.data.sections.find((s) => s.id === note.sectionId);
+
     const comments = this.data.comments
       .filter((c) => c.noteId === note.id && !c.isModerated)
-      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() -
+          new Date(a.createdAt).getTime()
+      );
 
     return {
       ...note,
@@ -509,9 +543,10 @@ class DatabaseService {
     if (!sec) throw new Error('Section tujuan tidak ditemukan');
 
     const id = `note-${crypto.randomUUID().slice(0, 8)}`;
-    let baseSlug = slugify(title) || 'catatan';
+    const baseSlug = slugify(title) || 'catatan';
     let slug = baseSlug;
     let counter = 1;
+
     while (this.data.notes.some((n) => n.slug === slug)) {
       slug = `${baseSlug}-${counter++}`;
     }
@@ -521,7 +556,10 @@ class DatabaseService {
     const now = new Date().toISOString();
 
     const secNotes = this.data.notes.filter((n) => n.sectionId === sec.id);
-    const maxOrder = secNotes.reduce((acc, n) => Math.max(acc, n.sortOrder || 0), 0);
+    const maxOrder = secNotes.reduce(
+      (acc, n) => Math.max(acc, n.sortOrder || 0),
+      0
+    );
 
     const newNote: Note = {
       id,
@@ -538,6 +576,7 @@ class DatabaseService {
     this.data.notes.push(newNote);
     sec.updatedAt = now;
     this.save();
+
     return newNote;
   }
 
@@ -553,9 +592,11 @@ class DatabaseService {
     if (idx === -1) throw new Error('Catatan tidak ditemukan');
 
     const note = this.data.notes[idx];
+
     if (updates.title !== undefined) {
       const trimmed = updates.title.trim();
       if (!trimmed) throw new Error('Judul catatan tidak boleh kosong');
+
       note.title = trimmed;
     }
 
@@ -571,7 +612,6 @@ class DatabaseService {
     const now = new Date().toISOString();
     note.updatedAt = now;
 
-    // Update parent section updatedAt too
     const sec = this.data.sections.find((s) => s.id === note.sectionId);
     if (sec) {
       sec.updatedAt = now;
@@ -579,6 +619,7 @@ class DatabaseService {
 
     this.data.notes[idx] = note;
     this.save();
+
     return note;
   }
 
@@ -587,75 +628,147 @@ class DatabaseService {
     if (noteIdx === -1) throw new Error('Catatan tidak ditemukan');
 
     const initialCommentsCount = this.data.comments.length;
+
     this.data.comments = this.data.comments.filter((c) => c.noteId !== id);
-    const deletedCommentsCount = initialCommentsCount - this.data.comments.length;
+
+    const deletedCommentsCount =
+      initialCommentsCount - this.data.comments.length;
 
     this.data.notes.splice(noteIdx, 1);
     this.save();
+
     return { deletedCommentsCount };
   }
 
   // --- COMMENTS ---
 
-  getCommentsByNoteId(noteId: string, includeModerated = false): Comment[] {
+  getCommentsByNoteId(
+    noteId: string,
+    includeModerated = false
+  ): Comment[] {
     return this.data.comments
-      .filter((c) => c.noteId === noteId && (includeModerated || !c.isModerated))
-      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+      .filter(
+        (c) =>
+          c.noteId === noteId &&
+          (includeModerated || !c.isModerated)
+      )
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() -
+          new Date(a.createdAt).getTime()
+      );
   }
 
   addComment(input: {
     noteId: string;
     authorName: string;
     content: string;
+    parentCommentId?: string | null;
+    isOwnerReply?: boolean;
   }): Comment {
     const authorName = input.authorName.trim();
     const content = input.content.trim();
+    const parentCommentId = input.parentCommentId || null;
+    const isOwnerReply = input.isOwnerReply === true;
 
     if (!authorName || authorName.length < 2) {
       throw new Error('Nama panggilan minimal 2 karakter');
     }
+
     if (authorName.length > 50) {
       throw new Error('Nama panggilan maksimal 50 karakter');
     }
+
     if (!content || content.length < 2) {
       throw new Error('Isi komentar minimal 2 karakter');
     }
+
     if (content.length > 1000) {
       throw new Error('Isi komentar maksimal 1000 karakter');
     }
 
     const note = this.data.notes.find((n) => n.id === input.noteId);
-    if (!note) throw new Error('Catatan tidak ditemukan');
+
+    if (!note) {
+      throw new Error('Catatan tidak ditemukan');
+    }
+
+    if (parentCommentId) {
+      const parent = this.data.comments.find(
+        (c) => c.id === parentCommentId
+      );
+
+      if (!parent || parent.noteId !== note.id) {
+        throw new Error('Komentar yang akan dibalas tidak ditemukan');
+      }
+
+      if (parent.isModerated && !isOwnerReply) {
+        throw new Error('Komentar ini tidak tersedia untuk dibalas');
+      }
+    }
 
     const id = `comm-${crypto.randomUUID().slice(0, 8)}`;
+
     const newComment: Comment = {
       id,
       noteId: note.id,
-      authorName,
+      authorName: isOwnerReply ? 'Pemilik Catatan' : authorName,
       content,
       createdAt: new Date().toISOString(),
       isModerated: false,
+      parentCommentId,
+      isOwnerReply,
     };
 
     this.data.comments.push(newComment);
     this.save();
+
     return newComment;
   }
 
   toggleModerateComment(id: string): Comment {
-    const comm = this.data.comments.find((c) => c.id === id);
-    if (!comm) throw new Error('Komentar tidak ditemukan');
+    const comment = this.data.comments.find((c) => c.id === id);
 
-    comm.isModerated = !comm.isModerated;
+    if (!comment) {
+      throw new Error('Komentar tidak ditemukan');
+    }
+
+    comment.isModerated = !comment.isModerated;
     this.save();
-    return comm;
+
+    return comment;
   }
 
   deleteComment(id: string): void {
-    const idx = this.data.comments.findIndex((c) => c.id === id);
-    if (idx === -1) throw new Error('Komentar tidak ditemukan');
+    const comment = this.data.comments.find((c) => c.id === id);
 
-    this.data.comments.splice(idx, 1);
+    if (!comment) {
+      throw new Error('Komentar tidak ditemukan');
+    }
+
+    const idsToDelete = new Set<string>([id]);
+
+    let changed = true;
+
+    while (changed) {
+      changed = false;
+
+      for (const item of this.data.comments) {
+        if (
+          item.parentCommentId &&
+          idsToDelete.has(item.parentCommentId) &&
+          !idsToDelete.has(item.id)
+        ) {
+          idsToDelete.add(item.id);
+          changed = true;
+        }
+      }
+    }
+
+    this.data.comments = this.data.comments.filter(
+      (item) => !idsToDelete.has(item.id)
+    );
+
     this.save();
   }
 
@@ -667,13 +780,15 @@ class DatabaseService {
 
     const results: SearchResult[] = [];
 
-    // Search Sections
     for (const sec of this.data.sections) {
       if (
         sec.title.toLowerCase().includes(q) ||
         (sec.description && sec.description.toLowerCase().includes(q))
       ) {
-        const secNotes = this.data.notes.filter((n) => n.sectionId === sec.id);
+        const secNotes = this.data.notes.filter(
+          (n) => n.sectionId === sec.id
+        );
+
         results.push({
           id: sec.id,
           type: 'section',
@@ -685,16 +800,21 @@ class DatabaseService {
       }
     }
 
-    // Search Notes
     for (const note of this.data.notes) {
       const titleMatch = note.title.toLowerCase().includes(q);
-      const textMatch = note.snippet.toLowerCase().includes(q) || note.content.toLowerCase().includes(q);
+      const textMatch =
+        note.snippet.toLowerCase().includes(q) ||
+        note.content.toLowerCase().includes(q);
 
       if (titleMatch || textMatch) {
-        const sec = this.data.sections.find((s) => s.id === note.sectionId);
+        const sec = this.data.sections.find(
+          (s) => s.id === note.sectionId
+        );
+
         const comms = this.data.comments.filter(
           (c) => c.noteId === note.id && !c.isModerated
         );
+
         results.push({
           id: note.id,
           type: 'note',
@@ -725,6 +845,7 @@ class DatabaseService {
     return this.data.notes.map((n) => {
       const sec = this.data.sections.find((s) => s.id === n.sectionId);
       const comms = this.data.comments.filter((c) => c.noteId === n.id);
+
       return {
         ...n,
         sectionTitle: sec ? sec.title : 'Section',
@@ -736,6 +857,7 @@ class DatabaseService {
   getAllCommentsForOwner() {
     return this.data.comments.map((c) => {
       const note = this.data.notes.find((n) => n.id === c.noteId);
+
       return {
         ...c,
         noteTitle: note ? note.title : 'Catatan',

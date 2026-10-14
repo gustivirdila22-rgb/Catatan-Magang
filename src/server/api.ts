@@ -256,9 +256,10 @@ apiRouter.post('/notes/:noteId/comments', (req: Request, res: Response) => {
     const { noteId } = req.params;
     const ip = getClientIp(req);
     const now = Date.now();
+    const isOwner = isOwnerSession(req);
 
-    // Rate limiting: 4 seconds between comments from same IP
     const lastTime = commentRateMap.get(ip) || 0;
+
     if (now - lastTime < 4000) {
       res.status(429).json({
         error: 'Mohon tunggu beberapa detik sebelum mengirim komentar berikutnya.',
@@ -266,39 +267,97 @@ apiRouter.post('/notes/:noteId/comments', (req: Request, res: Response) => {
       return;
     }
 
-    const { authorName, content } = req.body || {};
-    if (!authorName || typeof authorName !== 'string' || authorName.trim().length < 2) {
-      res.status(400).json({ error: 'Nama panggilan minimal 2 karakter.' });
-      return;
-    }
-    if (!content || typeof content !== 'string' || content.trim().length < 2) {
-      res.status(400).json({ error: 'Isi komentar minimal 2 karakter.' });
+    const { authorName, content, parentCommentId } = req.body || {};
+
+    if (
+      !isOwner &&
+      (!authorName ||
+        typeof authorName !== 'string' ||
+        authorName.trim().length < 2)
+    ) {
+      res.status(400).json({
+        error: 'Nama panggilan minimal 2 karakter.',
+      });
       return;
     }
 
-    // Basic spam filter check
+    if (
+      !isOwner &&
+      typeof authorName === 'string' &&
+      authorName.trim().length > 50
+    ) {
+      res.status(400).json({
+        error: 'Nama panggilan maksimal 50 karakter.',
+      });
+      return;
+    }
+
+    if (
+      !content ||
+      typeof content !== 'string' ||
+      content.trim().length < 2
+    ) {
+      res.status(400).json({
+        error: 'Isi komentar minimal 2 karakter.',
+      });
+      return;
+    }
+
     const cleanContent = content.trim();
+
     if (cleanContent.length > 1000) {
-      res.status(400).json({ error: 'Komentar terlalu panjang (maksimal 1000 karakter).' });
+      res.status(400).json({
+        error: 'Komentar terlalu panjang (maksimal 1000 karakter).',
+      });
+      return;
+    }
+
+    if (
+      parentCommentId !== undefined &&
+      parentCommentId !== null &&
+      (typeof parentCommentId !== 'string' ||
+        parentCommentId.trim().length === 0)
+    ) {
+      res.status(400).json({
+        error: 'Referensi komentar balasan tidak valid.',
+      });
+      return;
+    }
+
+    const note = db.getNoteById(noteId);
+
+    if (!note) {
+      res.status(404).json({
+        error: 'Catatan tidak ditemukan.',
+      });
       return;
     }
 
     const newComment = db.addComment({
       noteId,
-      authorName: authorName.trim(),
+      authorName: isOwner
+        ? 'Pemilik Catatan'
+        : authorName.trim(),
       content: cleanContent,
+      parentCommentId: parentCommentId || null,
+      isOwnerReply: isOwner,
     });
 
     commentRateMap.set(ip, now);
 
-    const note = db.getNoteById(noteId);
+    const comments = db.getCommentsByNoteId(noteId, isOwner);
+
     res.status(201).json({
       comment: newComment,
-      commentCount: note ? note.commentCount : 1,
-      message: 'Komentar Anda berhasil dikirim.',
+      commentCount: comments.length,
+      message: parentCommentId
+        ? 'Balasan berhasil dikirim.'
+        : 'Komentar Anda berhasil dikirim.',
     });
   } catch (err: any) {
-    res.status(400).json({ error: err.message || 'Gagal mengirim komentar' });
+    res.status(400).json({
+      error: err.message || 'Gagal mengirim komentar.',
+    });
   }
 });
 

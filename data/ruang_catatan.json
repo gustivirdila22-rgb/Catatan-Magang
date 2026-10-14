@@ -8,7 +8,7 @@
       "description": "Berisi catatan selama kegiatan magang, mulai dari ide, diskusi, hingga hasil kerja.",
       "sortOrder": 1,
       "createdAt": "2025-04-01T08:00:00.000Z",
-      "updatedAt": "2026-10-14T02:47:23.860Z"
+      "updatedAt": "2026-10-14T04:31:14.368Z"
     },
     {
       "id": "sec-2",
@@ -18,7 +18,7 @@
       "description": "Kumpulan gagasan kreatif, eksplorasi teknologi baru, dan rencana arsitektur sistem.",
       "sortOrder": 2,
       "createdAt": "2025-04-02T09:30:00.000Z",
-      "updatedAt": "2025-04-10T11:20:00.000Z"
+      "updatedAt": "2026-10-14T03:44:52.929Z"
     },
     {
       "id": "sec-3",
@@ -28,7 +28,7 @@
       "description": "Rangkuman materi perkuliahan, tugas akhir, dan jadwal bimbingan akademik.",
       "sortOrder": 3,
       "createdAt": "2025-04-03T10:00:00.000Z",
-      "updatedAt": "2025-04-09T16:45:00.000Z"
+      "updatedAt": "2026-10-14T02:41:23.941Z"
     },
     {
       "id": "sec-4",
@@ -38,7 +38,7 @@
       "description": "Tautan dokumentasi, artikel ilmiah, panduan desain, dan inspirasi open source.",
       "sortOrder": 4,
       "createdAt": "2025-04-04T13:15:00.000Z",
-      "updatedAt": "2025-04-08T15:10:00.000Z"
+      "updatedAt": "2026-10-14T03:47:09.002Z"
     },
     {
       "id": "sec-5",
@@ -48,17 +48,7 @@
       "description": "Notula rapat internal tim, sync mingguan, dan tindak lanjut action items.",
       "sortOrder": 5,
       "createdAt": "2025-04-05T14:00:00.000Z",
-      "updatedAt": "2026-10-14T02:45:16.853Z"
-    },
-    {
-      "id": "sec-b377fdf1",
-      "title": "Catatan tambahan",
-      "slug": "catatan-tambahan",
-      "icon": "file-text",
-      "description": "",
-      "sortOrder": 6,
-      "createdAt": "2026-10-14T02:31:57.568Z",
-      "updatedAt": "2026-10-14T02:48:03.372Z"
+      "updatedAt": "2026-10-14T02:39:47.251Z"
     }
   ],
   "notes": [
@@ -67,11 +57,11 @@
       "sectionId": "sec-1",
       "title": "Hasil diskusi mentor",
       "slug": "hasil-diskusi-mentor",
-      "content": "<p>Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain:</p><ol><li><p>Fokus pada fitur utama terlebih dahulu.</p></li><li><p>Gunakan teknologi yang lebih stabil dan mudah di-maintain.</p></li><li><p>Pertimbangkan integrasi dengan layanan pihak ketiga.</p></li></ol><h3>Catatan tambahan</h3><ul data-type=\"taskList\"><li data-checked=\"false\" data-type=\"taskItem\"><label><input type=\"checkbox\"><span></span></label><div><p></p></div></li></ul><ul><li><p>Perbaiki struktur database</p></li><li><p>Update dokumentasi API</p></li><li><p>Siapkan prototype untuk evaluasi</p></li></ul><p>Link referensi: <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-[#344F3D] underline underline-offset-4 font-medium hover:opacity-80 transition-opacity\" href=\"https://example.com/mentorship\">https://example.com/mentorship</a></p>",
+      "content": "<p>Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain:</p><ol><li><p>Fokus pada fitur utama terlebih dahulu.</p></li><li><p>Gunakan teknologi yang lebih stabil dan mudah di-maintain.</p></li><li><p>Pertimbangkan integrasi dengan layanan pihak ketiga.</p></li></ol><h3>Catatan tambahan</h3><ul data-type=\"taskList\"><li data-checked=\"true\" data-type=\"taskItem\"><label><input type=\"checkbox\" checked=\"checked\"><span></span></label><div><p></p></div></li></ul><ul><li><p>Perbaiki struktur database</p></li><li><p>Update dokumentasi API</p></li><li><p>Siapkan prototype untuk evaluasi</p></li></ul><p>Link referensi: <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-[#344F3D] underline underline-offset-4 font-medium hover:opacity-80 transition-opacity\" href=\"https://example.com/mentorship\">https://example.com/mentorship</a></p>",
       "snippet": "Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain: Fokus pada fitur utama terlebih dahulu. Gunakan te",
       "sortOrder": 1,
       "createdAt": "2025-04-10T08:30:00.000Z",
-      "updatedAt": "2026-10-14T02:47:14.978Z"
+      "updatedAt": "2026-10-14T04:31:14.368Z"
     },
     {
       "id": "note-2",
@@ -82,18 +72,18 @@
       "snippet": "Beberapa ide fitur yang bisa dikembangkan untuk project magang, seperti sistem notifikasi dan integrasi API yang lebih modular. Desain antarmuka yang lebih clea",
       "sortOrder": 2,
       "createdAt": "2025-04-12T09:00:00.000Z",
-      "updatedAt": "2026-10-14T02:41:43.731Z"
+      "updatedAt": "2026-10-14T02:47:39.398Z"
     },
     {
       "id": "note-3",
       "sectionId": "sec-1",
       "title": "Daftar revisi",
       "slug": "daftar-revisi",
-      "content": "<p>Berikut adalah daftar revisi yang perlu dilakukan sebelum presentasi final minggu depan:</p><ul data-type=\"taskList\"><li data-checked=\"true\"><label><input type=\"checkbox\" checked=\"checked\"></label><div><p>Uji responsivitas pada perangkat layar sentuh</p></div></li><li data-checked=\"false\"><label><input type=\"checkbox\"></label><div><p>Periksa validasi input komentar terhadap konten spam</p></div></li><li data-checked=\"false\"><label><input type=\"checkbox\"></label><div><p>Tambahkan breadcrumb navigasi yang intuitif</p></div></li></ul>",
-      "snippet": "Berikut adalah daftar revisi yang perlu dilakukan sebelum presentasi final...",
+      "content": "<p>Berikut adalah daftar revisi yang perlu dilakukan sebelum presentasi final minggu depan:</p><ul data-type=\"taskList\"><li data-checked=\"false\" data-type=\"taskItem\"><label><input type=\"checkbox\"><span></span></label><div><p></p></div></li></ul><ul><li><p>Uji responsivitas pada perangkat layar sentuh</p></li><li><p>Periksa validasi input komentar terhadap konten spam</p></li><li><p>Tambahkan breadcrumb navigasi yang intuitif</p></li></ul>",
+      "snippet": "Berikut adalah daftar revisi yang perlu dilakukan sebelum presentasi final minggu depan: Uji responsivitas pada perangkat layar sentuh Periksa validasi input ko",
       "sortOrder": 3,
       "createdAt": "2025-04-08T10:15:00.000Z",
-      "updatedAt": "2025-04-08T10:15:00.000Z"
+      "updatedAt": "2026-10-14T02:34:34.795Z"
     },
     {
       "id": "note-4",
@@ -101,10 +91,10 @@
       "title": "Referensi project",
       "slug": "referensi-project",
       "content": "<p>Beberapa referensi project yang bisa dijadikan inspirasi untuk pengembangan fitur dan pengalaman antarmuka yang nyaman.</p><p>Prinsip utama yang diadaptasi adalah estetika editorial tenang dengan aksen warna sage green dan cream hangat.</p>",
-      "snippet": "Beberapa referensi project yang bisa dijadikan inspirasi untuk pengembangan fitur dan pengalaman antarmuka yang nyaman. Prinsip utama yang diadaptasi adalah est",
+      "snippet": "Beberapa referensi project yang bisa dijadikan inspirasi untuk pengembangan fitur...",
       "sortOrder": 4,
       "createdAt": "2025-04-05T11:45:00.000Z",
-      "updatedAt": "2026-10-14T02:47:23.860Z"
+      "updatedAt": "2025-04-05T11:45:00.000Z"
     },
     {
       "id": "note-5",
@@ -112,10 +102,10 @@
       "title": "Arsitektur micro-services sederhana",
       "slug": "arsitektur-micro-services-sederhana",
       "content": "<p>Rancangan pemisahan service otorisasi dan konten utama untuk menjaga performa server tetap stabil.</p>",
-      "snippet": "Rancangan pemisahan service otorisasi dan konten utama untuk menjaga performa...",
+      "snippet": "Rancangan pemisahan service otorisasi dan konten utama untuk menjaga performa server tetap stabil.",
       "sortOrder": 1,
       "createdAt": "2025-04-02T10:00:00.000Z",
-      "updatedAt": "2025-04-06T12:00:00.000Z"
+      "updatedAt": "2026-10-14T03:41:35.722Z"
     },
     {
       "id": "note-6",
@@ -123,10 +113,10 @@
       "title": "Benchmarking state management",
       "slug": "benchmarking-state-management",
       "content": "<p>Hasil perbandingan performa antara optimistic updates dan server-rendered state.</p>",
-      "snippet": "Hasil perbandingan performa antara optimistic updates dan server-rendered state...",
+      "snippet": "Hasil perbandingan performa antara optimistic updates dan server-rendered state.",
       "sortOrder": 2,
       "createdAt": "2025-04-04T15:20:00.000Z",
-      "updatedAt": "2025-04-07T08:10:00.000Z"
+      "updatedAt": "2026-10-14T03:44:52.929Z"
     },
     {
       "id": "note-7",
@@ -145,10 +135,10 @@
       "title": "Rangkuman kuliah basis data lanjut",
       "slug": "rangkuman-kuliah-basis-data-lanjut",
       "content": "<p>Konsep indexing B-Tree, query optimization, dan normalisasi bentuk ketiga hingga BCNF.</p>",
-      "snippet": "Konsep indexing B-Tree, query optimization, dan normalisasi bentuk ketiga hingga BCNF...",
+      "snippet": "Konsep indexing B-Tree, query optimization, dan normalisasi bentuk ketiga hingga BCNF.",
       "sortOrder": 1,
       "createdAt": "2025-04-03T08:00:00.000Z",
-      "updatedAt": "2025-04-05T09:00:00.000Z"
+      "updatedAt": "2026-10-14T02:41:23.941Z"
     },
     {
       "id": "note-9",
@@ -156,10 +146,10 @@
       "title": "Dokumentasi REST API & Best Practices",
       "slug": "dokumentasi-rest-api-best-practices",
       "content": "<p>Kumpulan tautan panduan REST API standar industri, status codes yang tepat, dan teknik caching.</p>",
-      "snippet": "Kumpulan tautan panduan REST API standar industri, status codes yang tepat...",
+      "snippet": "Kumpulan tautan panduan REST API standar industri, status codes yang tepat, dan teknik caching.",
       "sortOrder": 1,
       "createdAt": "2025-04-04T14:00:00.000Z",
-      "updatedAt": "2025-04-08T11:00:00.000Z"
+      "updatedAt": "2026-10-14T03:47:09.002Z"
     },
     {
       "id": "note-10",
@@ -170,29 +160,18 @@
       "snippet": "Catatan pembahasan sprint 4 mengenai integrasi rich text dan autosave debounce.",
       "sortOrder": 1,
       "createdAt": "2025-04-05T15:00:00.000Z",
-      "updatedAt": "2026-10-14T02:45:16.853Z"
+      "updatedAt": "2026-10-14T02:39:47.251Z"
     },
     {
-      "id": "note-0db357a8",
-      "sectionId": "sec-b377fdf1",
-      "title": "ide pengembangan",
-      "slug": "ide-pengembangan",
-      "content": "<p>blablabla</p>",
-      "snippet": "blablabla",
-      "sortOrder": 1,
-      "createdAt": "2026-10-14T02:32:17.585Z",
-      "updatedAt": "2026-10-14T02:48:00.115Z"
-    },
-    {
-      "id": "note-63cf72e4",
-      "sectionId": "sec-b377fdf1",
-      "title": "apaaa",
-      "slug": "apaaa",
+      "id": "note-86b0f0e4",
+      "sectionId": "sec-1",
+      "title": "Sikoboy",
+      "slug": "sikoboy",
       "content": "<p></p>",
       "snippet": "",
-      "sortOrder": 2,
-      "createdAt": "2026-10-14T02:40:25.813Z",
-      "updatedAt": "2026-10-14T02:48:03.372Z"
+      "sortOrder": 5,
+      "createdAt": "2026-10-14T02:32:13.109Z",
+      "updatedAt": "2026-10-14T02:32:13.109Z"
     }
   ],
   "comments": [
@@ -267,6 +246,82 @@
       "content": "Rangkuman yang sangat jelas, terima kasih!",
       "createdAt": "2026-10-14T02:07:06.873Z",
       "isModerated": false
+    },
+    {
+      "id": "comm-d3d8d875",
+      "noteId": "note-1",
+      "authorName": "cici",
+      "content": "masih bingung poin 1",
+      "createdAt": "2026-10-14T03:03:39.903Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-62322cd0",
+      "noteId": "note-5",
+      "authorName": "cici",
+      "content": "itu gimana maksutnya?",
+      "createdAt": "2026-10-14T03:41:53.174Z",
+      "isModerated": false
+    },
+    {
+      "id": "comm-e8abc02f",
+      "noteId": "note-1",
+      "authorName": "Pemilik Catatan",
+      "content": "penjelasan 1",
+      "createdAt": "2026-10-14T03:48:40.389Z",
+      "isModerated": false,
+      "parentCommentId": "comm-d3d8d875",
+      "isOwnerReply": true
+    },
+    {
+      "id": "comm-be2596bc",
+      "noteId": "note-1",
+      "authorName": "Pemilik Catatan",
+      "content": "kalo masih belum paham lagi kita zoom",
+      "createdAt": "2026-10-14T03:49:00.322Z",
+      "isModerated": false,
+      "parentCommentId": "comm-e8abc02f",
+      "isOwnerReply": true
+    },
+    {
+      "id": "comm-fdeec1e0",
+      "noteId": "note-1",
+      "authorName": "Pemilik Catatan",
+      "content": "nanti jam 14.00",
+      "createdAt": "2026-10-14T03:49:19.550Z",
+      "isModerated": false,
+      "parentCommentId": "comm-be2596bc",
+      "isOwnerReply": true
+    },
+    {
+      "id": "comm-86c44b5f",
+      "noteId": "note-1",
+      "authorName": "eta",
+      "content": "masih bingung kak",
+      "createdAt": "2026-10-14T03:51:28.177Z",
+      "isModerated": false,
+      "parentCommentId": "comm-e8abc02f",
+      "isOwnerReply": false
+    },
+    {
+      "id": "comm-2b3d2c76",
+      "noteId": "note-1",
+      "authorName": "Pemilik Catatan",
+      "content": "jadi gini",
+      "createdAt": "2026-10-14T03:51:48.692Z",
+      "isModerated": false,
+      "parentCommentId": "comm-86c44b5f",
+      "isOwnerReply": true
+    },
+    {
+      "id": "comm-612be074",
+      "noteId": "note-1",
+      "authorName": "eta",
+      "content": "masih bingung",
+      "createdAt": "2026-10-14T03:52:09.153Z",
+      "isModerated": false,
+      "parentCommentId": "comm-2b3d2c76",
+      "isOwnerReply": false
     }
   ],
   "version": 1

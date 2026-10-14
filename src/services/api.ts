@@ -100,12 +100,26 @@ export const api = {
     return request(`/api/notes/${encodeURIComponent(noteId)}/comments`);
   },
 
-  async addComment(noteId: string, input: { authorName: string; content: string }): Promise<{ comment: Comment; commentCount: number; message: string }> {
-    return request(`/api/notes/${encodeURIComponent(noteId)}/comments`, {
+  async addComment(
+  noteId: string,
+  input: {
+    authorName: string;
+    content: string;
+    parentCommentId?: string | null;
+  }
+): Promise<{
+  comment: Comment;
+  commentCount: number;
+  message: string;
+}> {
+  return request(
+    `/api/notes/${encodeURIComponent(noteId)}/comments`,
+    {
       method: 'POST',
       body: JSON.stringify(input),
-    });
-  },
+    }
+  );
+},
 
   async toggleModerateComment(id: string): Promise<{ comment: Comment; message: string }> {
     return request(`/api/comments/${encodeURIComponent(id)}/moderate`, {
