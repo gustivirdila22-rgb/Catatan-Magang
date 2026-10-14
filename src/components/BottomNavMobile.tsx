@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Search, Folder, ShieldCheck, Lock } from 'lucide-react';
+import { Home, Search, ShieldCheck, Lock } from 'lucide-react';
 
 interface BottomNavMobileProps {
   currentView: 'home' | 'section' | 'note' | 'owner';
@@ -34,16 +34,6 @@ export const BottomNavMobile: React.FC<BottomNavMobileProps> = ({
       >
         <Search className="w-5 h-5" />
         <span>Cari</span>
-      </button>
-
-      <button
-        onClick={onGoHome}
-        className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-medium transition-colors ${
-          currentView === 'section' ? 'text-[#344F3D]' : 'text-[#778078] hover:text-[#26352C]'
-        }`}
-      >
-        <Folder className="w-5 h-5" />
-        <span>Section</span>
       </button>
 
       <button

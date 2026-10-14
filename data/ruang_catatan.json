@@ -8,7 +8,7 @@
       "description": "Berisi catatan selama kegiatan magang, mulai dari ide, diskusi, hingga hasil kerja.",
       "sortOrder": 1,
       "createdAt": "2025-04-01T08:00:00.000Z",
-      "updatedAt": "2025-04-11T14:32:00.000Z"
+      "updatedAt": "2026-10-14T02:47:23.860Z"
     },
     {
       "id": "sec-2",
@@ -48,7 +48,17 @@
       "description": "Notula rapat internal tim, sync mingguan, dan tindak lanjut action items.",
       "sortOrder": 5,
       "createdAt": "2025-04-05T14:00:00.000Z",
-      "updatedAt": "2025-04-07T17:00:00.000Z"
+      "updatedAt": "2026-10-14T02:45:16.853Z"
+    },
+    {
+      "id": "sec-b377fdf1",
+      "title": "Catatan tambahan",
+      "slug": "catatan-tambahan",
+      "icon": "file-text",
+      "description": "",
+      "sortOrder": 6,
+      "createdAt": "2026-10-14T02:31:57.568Z",
+      "updatedAt": "2026-10-14T02:48:03.372Z"
     }
   ],
   "notes": [
@@ -57,22 +67,22 @@
       "sectionId": "sec-1",
       "title": "Hasil diskusi mentor",
       "slug": "hasil-diskusi-mentor",
-      "content": "<p>Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain:</p><ol><li>Fokus pada fitur utama terlebih dahulu.</li><li>Gunakan teknologi yang lebih stabil dan mudah di-maintain.</li><li>Pertimbangkan integrasi dengan layanan pihak ketiga.</li></ol><h3>Catatan tambahan</h3><ul data-type=\"taskList\"><li data-checked=\"false\"><label><input type=\"checkbox\"></label><div><p>Perbaiki struktur database</p></div></li><li data-checked=\"true\"><label><input type=\"checkbox\" checked=\"checked\"></label><div><p>Update dokumentasi API</p></div></li><li data-checked=\"false\"><label><input type=\"checkbox\"></label><div><p>Siapkan prototype untuk evaluasi</p></div></li></ul><p>Link referensi: <a href=\"https://example.com/mentorship\" target=\"_blank\" rel=\"noopener noreferrer\">https://example.com/mentorship</a></p>",
-      "snippet": "Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain: fokus pada fitur utama terlebih dahulu...",
+      "content": "<p>Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain:</p><ol><li><p>Fokus pada fitur utama terlebih dahulu.</p></li><li><p>Gunakan teknologi yang lebih stabil dan mudah di-maintain.</p></li><li><p>Pertimbangkan integrasi dengan layanan pihak ketiga.</p></li></ol><h3>Catatan tambahan</h3><ul data-type=\"taskList\"><li data-checked=\"false\" data-type=\"taskItem\"><label><input type=\"checkbox\"><span></span></label><div><p></p></div></li></ul><ul><li><p>Perbaiki struktur database</p></li><li><p>Update dokumentasi API</p></li><li><p>Siapkan prototype untuk evaluasi</p></li></ul><p>Link referensi: <a target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-[#344F3D] underline underline-offset-4 font-medium hover:opacity-80 transition-opacity\" href=\"https://example.com/mentorship\">https://example.com/mentorship</a></p>",
+      "snippet": "Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain: Fokus pada fitur utama terlebih dahulu. Gunakan te",
       "sortOrder": 1,
       "createdAt": "2025-04-10T08:30:00.000Z",
-      "updatedAt": "2025-04-11T14:32:00.000Z"
+      "updatedAt": "2026-10-14T02:47:14.978Z"
     },
     {
       "id": "note-2",
       "sectionId": "sec-1",
       "title": "Ide pengembangan aplikasi",
       "slug": "ide-pengembangan-aplikasi",
-      "content": "<p>Beberapa ide fitur yang bisa dikembangkan untuk project magang, seperti sistem notifikasi dan integrasi API yang lebih modular.</p><ul><li>Desain antarmuka yang lebih clean dan ramah pengguna mobile.</li><li>Optimalisasi debounce autosave untuk pengalaman menulis tanpa jeda.</li><li>Pengelompokan catatan dengan sistem penanda dan pencarian cepat.</li></ul>",
-      "snippet": "Beberapa ide fitur yang bisa dikembangkan untuk project magang, seperti sistem notifikasi dan integrasi API...",
+      "content": "<p>Beberapa ide fitur yang bisa dikembangkan untuk project magang, seperti sistem notifikasi dan integrasi API yang lebih modular.</p><ul><li><p>Desain antarmuka yang lebih clean dan ramah pengguna mobile.</p></li><li><p>Optimalisasi debounce autosave untuk pengalaman menulis tanpa jeda.</p></li><li><p>Pengelompokan catatan dengan sistem penanda dan pencarian cepat.</p></li></ul>",
+      "snippet": "Beberapa ide fitur yang bisa dikembangkan untuk project magang, seperti sistem notifikasi dan integrasi API yang lebih modular. Desain antarmuka yang lebih clea",
       "sortOrder": 2,
       "createdAt": "2025-04-12T09:00:00.000Z",
-      "updatedAt": "2025-04-12T09:00:00.000Z"
+      "updatedAt": "2026-10-14T02:41:43.731Z"
     },
     {
       "id": "note-3",
@@ -91,10 +101,10 @@
       "title": "Referensi project",
       "slug": "referensi-project",
       "content": "<p>Beberapa referensi project yang bisa dijadikan inspirasi untuk pengembangan fitur dan pengalaman antarmuka yang nyaman.</p><p>Prinsip utama yang diadaptasi adalah estetika editorial tenang dengan aksen warna sage green dan cream hangat.</p>",
-      "snippet": "Beberapa referensi project yang bisa dijadikan inspirasi untuk pengembangan fitur...",
+      "snippet": "Beberapa referensi project yang bisa dijadikan inspirasi untuk pengembangan fitur dan pengalaman antarmuka yang nyaman. Prinsip utama yang diadaptasi adalah est",
       "sortOrder": 4,
       "createdAt": "2025-04-05T11:45:00.000Z",
-      "updatedAt": "2025-04-05T11:45:00.000Z"
+      "updatedAt": "2026-10-14T02:47:23.860Z"
     },
     {
       "id": "note-5",
@@ -157,10 +167,32 @@
       "title": "Sinkronisasi mingguan sprint 4",
       "slug": "sinkronisasi-mingguan-sprint-4",
       "content": "<p>Catatan pembahasan sprint 4 mengenai integrasi rich text dan autosave debounce.</p>",
-      "snippet": "Catatan pembahasan sprint 4 mengenai integrasi rich text dan autosave debounce...",
+      "snippet": "Catatan pembahasan sprint 4 mengenai integrasi rich text dan autosave debounce.",
       "sortOrder": 1,
       "createdAt": "2025-04-05T15:00:00.000Z",
-      "updatedAt": "2025-04-07T16:00:00.000Z"
+      "updatedAt": "2026-10-14T02:45:16.853Z"
+    },
+    {
+      "id": "note-0db357a8",
+      "sectionId": "sec-b377fdf1",
+      "title": "ide pengembangan",
+      "slug": "ide-pengembangan",
+      "content": "<p>blablabla</p>",
+      "snippet": "blablabla",
+      "sortOrder": 1,
+      "createdAt": "2026-10-14T02:32:17.585Z",
+      "updatedAt": "2026-10-14T02:48:00.115Z"
+    },
+    {
+      "id": "note-63cf72e4",
+      "sectionId": "sec-b377fdf1",
+      "title": "apaaa",
+      "slug": "apaaa",
+      "content": "<p></p>",
+      "snippet": "",
+      "sortOrder": 2,
+      "createdAt": "2026-10-14T02:40:25.813Z",
+      "updatedAt": "2026-10-14T02:48:03.372Z"
     }
   ],
   "comments": [
