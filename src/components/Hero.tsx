@@ -31,8 +31,8 @@ export const Hero: React.FC<HeroProps> = ({ onAddSection }) => {
           </div>
         </div>
 
-        {/* Right Column: Botanical Art Matching Mockup */}
-        <div className="md:col-span-5 lg:col-span-4 flex justify-end items-center relative min-h-[160px] sm:min-h-[200px]">
+        {/* Right Column: Botanical Art Matching Mockup (Hidden on mobile, visible from medium screens up) */}
+        <div className="hidden md:col-span-5 lg:col-span-4 md:flex justify-end items-center relative min-h-[160px] sm:min-h-[200px]">
           {/* Subtle Organic Background Blob */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 w-56 h-56 sm:w-72 sm:h-72 bg-[#F5F1E8] rounded-full blur-2xl opacity-70 pointer-events-none" />
 

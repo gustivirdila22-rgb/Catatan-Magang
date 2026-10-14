@@ -8,7 +8,7 @@
       "description": "Berisi catatan selama kegiatan magang, mulai dari ide, diskusi, hingga hasil kerja.",
       "sortOrder": 1,
       "createdAt": "2025-04-01T08:00:00.000Z",
-      "updatedAt": "2026-10-14T04:31:14.368Z"
+      "updatedAt": "2026-10-14T05:39:32.457Z"
     },
     {
       "id": "sec-2",
@@ -18,7 +18,7 @@
       "description": "Kumpulan gagasan kreatif, eksplorasi teknologi baru, dan rencana arsitektur sistem.",
       "sortOrder": 2,
       "createdAt": "2025-04-02T09:30:00.000Z",
-      "updatedAt": "2026-10-14T03:44:52.929Z"
+      "updatedAt": "2026-10-14T05:35:05.680Z"
     },
     {
       "id": "sec-3",
@@ -71,7 +71,7 @@
       "snippet": "Hari ini kami berdiskusi mengenai arah pengembangan aplikasi. Beberapa poin penting yang dibahas antara lain: Fokus pada fitur utama terlebih dahulu. Gunakan te",
       "sortOrder": 1,
       "createdAt": "2025-04-10T08:30:00.000Z",
-      "updatedAt": "2026-10-14T04:31:14.368Z"
+      "updatedAt": "2026-10-14T05:39:32.457Z"
     },
     {
       "id": "note-2",
@@ -115,7 +115,7 @@
       "snippet": "Rancangan pemisahan service otorisasi dan konten utama untuk menjaga performa server tetap stabil.",
       "sortOrder": 1,
       "createdAt": "2025-04-02T10:00:00.000Z",
-      "updatedAt": "2026-10-14T03:41:35.722Z"
+      "updatedAt": "2026-10-14T05:35:05.680Z"
     },
     {
       "id": "note-6",
