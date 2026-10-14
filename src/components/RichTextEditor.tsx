@@ -47,6 +47,8 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
   const performSave = useCallback(
     async (contentToSave: string) => {
+      if (!isEditable) return;
+
       setSaveStatus('saving');
       try {
         await onSave(contentToSave);
@@ -57,7 +59,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
         setSaveStatus('error');
       }
     },
-    [onSave]
+    [isEditable, onSave]
   );
 
   const editor = useEditor({
@@ -85,6 +87,8 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     content: initialContent,
     editable: isEditable,
     onUpdate: ({ editor }) => {
+      if (!isEditable) return;
+
       const html = editor.getHTML();
       pendingContentRef.current = html;
       setSaveStatus('unsaved');
@@ -106,6 +110,13 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
       editor.setEditable(isEditable);
     }
   }, [editor, isEditable]);
+
+  useEffect(() => {
+    if (!isEditable && debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+  }, [isEditable]);
 
   // Clean up timer on unmount and perform final save if pending
   useEffect(() => {
@@ -318,45 +329,47 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
       {/* Status Bar at Bottom of Document */}
       <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3.5 bg-[#FAF8F5] border-t border-[#E7E5DD] rounded-b-2xl text-xs text-[#778078]">
         {/* Autosave Indicator */}
-        <div className="flex items-center gap-2">
-          {saveStatus === 'saved' && (
-            <span className="inline-flex items-center gap-1.5 text-[#344F3D] font-medium">
-              <CheckCircle2 className="w-4 h-4 text-[#879B83]" />
-              <span>Tersimpan</span>
-            </span>
-          )}
-
-          {saveStatus === 'unsaved' && (
-            <span className="inline-flex items-center gap-1.5 text-[#778078]">
-              <Clock className="w-4 h-4 text-[#879B83]" />
-              <span>Perubahan belum disimpan</span>
-            </span>
-          )}
-
-          {saveStatus === 'saving' && (
-            <span className="inline-flex items-center gap-1.5 text-[#344F3D]">
-              <span className="w-3.5 h-3.5 border-2 border-[#879B83] border-t-transparent rounded-full animate-spin" />
-              <span>Menyimpan...</span>
-            </span>
-          )}
-
-          {saveStatus === 'error' && (
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 text-[#9E3B3B] font-medium">
-                <AlertTriangle className="w-4 h-4" />
-                <span>Gagal menyimpan</span>
+        {isEditable && (
+          <div className="flex items-center gap-2">
+            {saveStatus === 'saved' && (
+              <span className="inline-flex items-center gap-1.5 text-[#344F3D] font-medium">
+                <CheckCircle2 className="w-4 h-4 text-[#879B83]" />
+                <span>Tersimpan</span>
               </span>
-              <button
-                type="button"
-                onClick={handleRetrySave}
-                className="inline-flex items-center gap-1 px-2 py-0.5 bg-white border border-[#E7E5DD] hover:bg-[#F5F1E8] text-[#26352C] rounded-md transition-colors font-medium text-xs cursor-pointer"
-              >
-                <RotateCcw className="w-3 h-3" />
-                <span>Coba Lagi</span>
-              </button>
-            </div>
-          )}
-        </div>
+            )}
+
+            {saveStatus === 'unsaved' && (
+              <span className="inline-flex items-center gap-1.5 text-[#778078]">
+                <Clock className="w-4 h-4 text-[#879B83]" />
+                <span>Perubahan belum disimpan</span>
+              </span>
+            )}
+
+            {saveStatus === 'saving' && (
+              <span className="inline-flex items-center gap-1.5 text-[#344F3D]">
+                <span className="w-3.5 h-3.5 border-2 border-[#879B83] border-t-transparent rounded-full animate-spin" />
+                <span>Menyimpan...</span>
+              </span>
+            )}
+
+            {saveStatus === 'error' && (
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 text-[#9E3B3B] font-medium">
+                  <AlertTriangle className="w-4 h-4" />
+                  <span>Gagal menyimpan</span>
+                </span>
+                <button
+                  type="button"
+                  onClick={handleRetrySave}
+                  className="inline-flex items-center gap-1 px-2 py-0.5 bg-white border border-[#E7E5DD] hover:bg-[#F5F1E8] text-[#26352C] rounded-md transition-colors font-medium text-xs cursor-pointer"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>Coba Lagi</span>
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Timestamp */}
         <div className="text-[11px] sm:text-xs text-[#778078] font-normal">
